@@ -13,7 +13,7 @@ my $builder = Module::Build->new(
     build_requires => {
         'Test::More' => 0,
         'DBI' => 0,
-        'DBD::SQLite' => 0,
+        'DBD::SQLite' => '1.37',
     },
     requires => {
         'perl' => 5.006,

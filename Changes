@@ -3,3 +3,6 @@ Revision history for DBIx-TryAgain
 0.01    Wed Jul 25 12:41:31 EDT 2012
         First version
 
+0.02    Thu Jul 26 09:43:07 EDT 2012
+        Minor pod and dependency fixes
+

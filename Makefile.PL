@@ -6,7 +6,7 @@ WriteMakefile
   'NAME' => 'DBIx::TryAgain',
   'VERSION_FROM' => 'lib/DBIx/TryAgain.pm',
   'PREREQ_PM' => {
-                   'DBD::SQLite' => 0,
+                   'DBD::SQLite' => '1.37',
                    'DBI' => 0,
                    'Test::More' => 0
                  },

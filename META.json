@@ -16,7 +16,7 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "DBD::SQLite" : "0",
+            "DBD::SQLite" : "1.37",
             "DBI" : "0",
             "Test::More" : "0"
          }
@@ -35,7 +35,7 @@
    "provides" : {
       "DBIx::TryAgain" : {
          "file" : "lib/DBIx/TryAgain.pm",
-         "version" : "0.01"
+         "version" : "0.02"
       },
       "DBIx::TryAgain::db" : {
          "file" : "lib/DBIx/TryAgain/db.pm",
@@ -52,5 +52,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.01"
+   "version" : "0.02"
 }

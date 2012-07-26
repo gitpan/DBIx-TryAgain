@@ -1,6 +1,6 @@
 =head1 NAME
 
-DBIx::TryAgain - If at first you don't succeed, try, try again.
+DBIx::TryAgain - If at first you don't succeed, try DBIx::TryAgain.
 
 =head1 SYNOPSIS
 
@@ -41,7 +41,11 @@ Brian Duggan, C<< <bduggan at matatu.org> >>
 
 =head1 SEE ALSO
 
- L<DBI>
+L<DBI>
+
+=head1 TODO
+
+Support error codes as well as messages.
 
 =cut
 
@@ -50,7 +54,7 @@ package DBIx::TryAgain;
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use DBI ( );
 use DBIx::TryAgain::st;

@@ -37,7 +37,11 @@ ok !$dbh->do("insert into foo (a) values (10)"), "do failed";
 like ($DBI::errstr, qr/locked/i, "got locked message");
 
 my $sth = $dbh->prepare("select * from foo");
-$sth->execute;
+ok $sth, "Prepare succeeded.";
+unless ($sth) {
+    diag "Prepare failed : ".$dbh->errstr;
+}
+ok !$sth->execute, "Execute failed";
 like ($sth->errstr, qr/locked/i, "got locked message");
 
 is $sth->{private_dbix_try_again_tries}, 3, "Tried 3 times";
