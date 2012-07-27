@@ -11,3 +11,4 @@ README
 t/00-load.t
 t/lock.t
 t/pod.t
+t/prepare.t

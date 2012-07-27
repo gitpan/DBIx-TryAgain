@@ -36,16 +36,21 @@ $dbh->sqlite_busy_timeout(1);
 ok !$dbh->do("insert into foo (a) values (10)"), "do failed";
 like ($DBI::errstr, qr/locked/i, "got locked message");
 
+# Some versions fail when preparing, some versions
+# fail when executing.
 my $sth = $dbh->prepare("select * from foo");
-ok $sth, "Prepare succeeded.";
-unless ($sth) {
-    diag "Prepare failed : ".$dbh->errstr;
-}
-ok !$sth->execute, "Execute failed";
-like ($sth->errstr, qr/locked/i, "got locked message");
 
-is $sth->{private_dbix_try_again_tries}, 3, "Tried 3 times";
-is_deeply $sth->{private_dbix_try_again_slept}, [1,1,2], "slept with fibonacci delay";
+if ($sth) {
+    ok $sth, "Prepare succeeded.";
+    ok !$sth->execute, "Execute failed";
+    like ($sth->errstr, qr/locked/i, "got locked message");
+
+    is $sth->{private_dbix_try_again_tries}, 3, "Tried 3 times";
+    is_deeply $sth->{private_dbix_try_again_slept}, [1,1,2], "slept with fibonacci delay";
+
+} else {
+    diag "Prepare failed, not retrying prepare in this test.";
+}
 
 done_testing();
 

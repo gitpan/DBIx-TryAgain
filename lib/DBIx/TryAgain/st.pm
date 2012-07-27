@@ -20,11 +20,13 @@ sub _should_try_again {
 
 sub _sleep {
     my $self = shift;
-    my $tried = $self->{private_dbix_try_again_tries} || 0;
-    unless ($tried) {
+    my $init = shift;
+    if ($init) {
+        $self->{private_dbix_try_again_tries} = 0;
         $self->{private_dbix_try_again_slept} = [];
         return;
     }
+    my $tried = $self->{private_dbix_try_again_tries};
     my $slept = $self->{private_dbix_try_again_slept};
     my $alg = $self->{private_dbix_try_again_algorithm};
     my $delay =
@@ -51,12 +53,12 @@ sub execute {
     my $self = shift;
     my $res = $self->SUPER::execute(@_);
     return $res if $res;
-    $self->_sleep; # initialize
+    $self->_sleep('init');
+    $self->{private_dbix_try_again_tries} = 0;
     while ($self->_should_try_again) {
-        $self->{private_dbix_try_again_tries} ||= 0;
         $self->{private_dbix_try_again_tries}++;
 
-        for ("DBIx::TryAgain [$$] attempt number ".$self->{private_dbix_try_again_tries}."\n") {
+        for ("DBIx::TryAgain [$$] execute attempt number ".$self->{private_dbix_try_again_tries}."\n") {
             DBI->trace_msg($_);
             warn $_ if $self->{PrintError};
         }

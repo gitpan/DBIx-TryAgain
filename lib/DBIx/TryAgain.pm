@@ -13,6 +13,7 @@ OR
  $dbh->try_again_algorithm('fibonacci');
  $dbh->try_again_max_retries(5);
  $dbh->try_again_on_messages([ qr/database is locked/i ]);
+ $dbh->try_again_on_prepare(1);
 
 =head1 DESCRIPTION
 
@@ -35,6 +36,9 @@ values for these algorithsm are :
 Modify the PrintError attribute and DBI_TRACE environment (as with
 DBI) to change the level of verbosity of this module.
 
+In addition to retrying an execute(), DBIx::TryAgain and also
+retry a prepare statement, by calling $dbh->try_again_on_prepare(1);
+
 =head1 AUTHOR
 
 Brian Duggan, C<< <bduggan at matatu.org> >>
@@ -54,7 +58,7 @@ package DBIx::TryAgain;
 use strict;
 use warnings;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use DBI ( );
 use DBIx::TryAgain::st;
