@@ -8,3 +8,6 @@ Revision history for DBIx-TryAgain
 
 0.03    Fri Jul 27 11:42:41 EDT 2012
         Added try_again_on_prepare
+
+0.04    Mon Jul 30 10:20:48 EDT 2012
+        more diagnostics in test for bsd

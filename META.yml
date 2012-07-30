@@ -18,7 +18,7 @@ name: DBIx-TryAgain
 provides:
   DBIx::TryAgain:
     file: lib/DBIx/TryAgain.pm
-    version: 0.03
+    version: 0.04
   DBIx::TryAgain::db:
     file: lib/DBIx/TryAgain/db.pm
     version: 0
@@ -29,4 +29,4 @@ requires:
   perl: 5.006
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.03
+version: 0.04

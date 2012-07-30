@@ -24,11 +24,11 @@ is_deeply $dbh->try_again_on_messages, [ qr/database is locked/i ], 'got default
 $dbh->do("create table foo (a int);");
 
 my $locker = DBIx::TryAgain->connect("dbi:SQLite:dbname=$dbfile","","", { PrintError => 0 } );
-ok $locker, "connected";
+ok $locker, "connected" or diag $DBI::errstr;
 
-ok $locker->do("PRAGMA locking_mode = EXCLUSIVE"), 'lock';
-ok $locker->do("BEGIN EXCLUSIVE"), 'begin transaction';
-ok $locker->do("COMMIT"), 'commit';
+ok $locker->do("PRAGMA locking_mode = EXCLUSIVE"), 'lock' or diag $locker->errstr;
+ok $locker->do("BEGIN EXCLUSIVE"), 'begin transaction' or diag $locker->errstr;
+ok $locker->do("COMMIT"), 'commit' or diag $locker->errstr;
 
 $dbh->sqlite_busy_timeout(1);
 
