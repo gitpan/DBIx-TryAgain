@@ -11,3 +11,6 @@ Revision history for DBIx-TryAgain
 
 0.04    Mon Jul 30 10:20:48 EDT 2012
         more diagnostics in test for bsd
+
+0.05    Tue Jul 31 06:30:21 EDT 2012
+        more diagnostics in tests for bsd

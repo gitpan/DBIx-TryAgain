@@ -9,7 +9,13 @@ use Data::Dumper;
 
 use strict;
 
-my $dbfile = File::Temp->new;
+if ($^O =~ /bsd/i) {
+    plan skip_all => "Locking on freebsd is unpredictable.";
+    exit;
+}
+
+my $dbfile = File::Temp->new(UNLINK => 0);
+unlink $dbfile;
 
 my $dbh = DBIx::TryAgain->connect("dbi:SQLite:dbname=$dbfile","","", { PrintError => 0 } )
     or die "connect error ".$DBI::errstr;
@@ -52,5 +58,6 @@ if ($sth) {
     diag "Prepare failed, not retrying prepare in this test.";
 }
 
+unlink $dbfile;
 done_testing();
 
